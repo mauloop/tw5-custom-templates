@@ -1,0 +1,12 @@
+created: 20171104223044187
+creator: )+(auloop
+modified: 20171104230741572
+modifier: )+(auloop
+tags: $:/tags/view/sample
+title: $:/_custom/view/sample/title
+type: text/vnd.tiddlywiki
+
+<div style="font-size:xx-large;background:#FFFF99;line-height:200%;text-align: center;">
+''{{!!title}}''
+<hr>
+</div>

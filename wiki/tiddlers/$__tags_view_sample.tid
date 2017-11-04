@@ -1,0 +1,9 @@
+created: 20171104223537067
+creator: )+(auloop
+list: $:/_custom/view/sample/title $:/_custom/view/sample/body
+modified: 20171104223627754
+modifier: )+(auloop
+template-exclude: $:/core/ui/ViewTemplate/title $:/core/ui/ViewTemplate/unfold $:/core/ui/ViewTemplate/subtitle $:/core/ui/ViewTemplate/tags $:/core/ui/ViewTemplate/classic $:/core/ui/ViewTemplate/body
+title: $:/tags/view/sample
+type: text/vnd.tiddlywiki
+

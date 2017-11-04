@@ -1,0 +1,11 @@
+created: 20171104214842829
+creator: )+(auloop
+modified: 20171104230618934
+modifier: )+(auloop
+tags: $:/tags/view/sample
+title: $:/_custom/view/sample/body
+type: text/vnd.tiddlywiki
+
+<div style="border: 1px solid grey; border-radius: 5px; padding: 10px">
+{{!!text}}
+</div>

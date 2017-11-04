@@ -1,0 +1,16 @@
+created: 20171104223633061
+creator: )+(auloop
+modified: 20171104230726878
+modifier: )+(auloop
+tags: 
+template: sample
+title: CustomTemplates usage example
+type: text/vnd.tiddlywiki
+
+I am tiddler based on the ''sample'' template.
+
+Sample view template is defined by all of the tiddlers tagged [[$:/tags/view/sample]]:
+
+<<list-links [tag[$:/tags/view/sample]!has[draft.of]]>>
+
+Click the small 'x' button next to my title in the Open Sidebar tab to close me.

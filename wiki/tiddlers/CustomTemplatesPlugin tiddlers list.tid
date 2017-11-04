@@ -1,0 +1,19 @@
+created: 20171104220616063
+modified: 20171104221157343
+tags: 
+title: CustomTemplatesPlugin tiddlers list
+type: text/vnd.tiddlywiki
+
+@@.tc-tiddler-frame
+@@background:#FFCCFF;
+;Warning
+:this plugin ovveride the default [[$:/core/ui/PageTemplate/story]] shadow tiddler
+@@
+
+<$button class="tc-btn-invisible tc-tiddlylink">
+{{$:/core/images/export-button}} Export these tiddlers in a JSON bundle
+<$action-sendmessage $message="tm-download-file" $param="$:/core/templates/exporters/JsonFile" exportFilter="""[tag[CustomTemplatesPlugin]sort[title]]""" filename="CustomTemplatesPlugin.json"/>
+</$button>
+
+----
+{{{[tag[CustomTemplatesPlugin]sort[title]]}}}

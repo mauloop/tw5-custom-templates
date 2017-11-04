@@ -1,0 +1,15 @@
+created: 20171104231201657
+creator: )+(auloop
+modified: 20171104231924401
+modifier: )+(auloop
+tags: 
+title: Home
+type: text/vnd.tiddlywiki
+
+Look at [[this sample|CustomTemplates usage example]] to get an idea of what I'm talking about.
+
+Go [[here|CustomTemplatesPlugin tiddlers list]] to download a JSON bundle of the plugin tiddlers.
+
+I call it //a plugin//, but actually it's just a bunch of tiddlers I have built for my own usage. Maybe one day I will pack it as a real plugin.
+
+Glad to share with you. You are advised that ''this is just an experiment'', which I'm still working on. Use it at your own risk.
