@@ -1,0 +1,68 @@
+[
+    {
+        "text": "<section class=\"tc-story-river\">\n\n<section class=\"story-backdrop\">\n\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/AboveStory]!has[draft.of]]\">\n\n<$transclude/>\n\n</$list>\n\n</section>\n\n<$list filter=<<story-filter>> emptyMessage={{$:/config/EmptyStoryMessage}}>\n<$set name=\"vt\" filter=\"\"\"[all[current]get[template]]\"\"\" value=\"$:/plugins/mau/CustomTemplates/view\" emptyValue=\"$:/core/ui/ViewTemplate\">\n<$set name=\"et\" filter=\"\"\"[all[current]get[template]]\"\"\" value=\"$:/plugins/mau/CustomTemplates/edit\" emptyValue=\"$:/core/ui/EditTemplate\">\n\n<$list filter=\"\"\"[all[current]]\"\"\" history=\"$:/HistoryList\" template=<<vt>> editTemplate=<<et>> storyview={{$:/view}} />\n\n</$set>\n</$set>\n</$list>\n\n<section class=\"story-frontdrop\">\n\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/BelowStory]!has[draft.of]]\">\n\n<$transclude/>\n\n</$list>\n\n</section>",
+        "bag": "default",
+        "revision": "0",
+        "type": "text/vnd.tiddlywiki",
+        "title": "$:/core/ui/PageTemplate/story",
+        "tags": "CustomTemplatesPlugin $:/tags/PageTemplate",
+        "modifier": "Maurizio Boero",
+        "modified": "20171104213832817",
+        "creator": "Maurizio Boero",
+        "created": "20171025234922404"
+    },
+    {
+        "text": "\\define actions()\n<$action-sendmessage $message=\"tm-add-tag\" $param={{$:/temp/NewTagName}}/>\n<$action-deletetiddler $tiddler=\"$:/temp/NewTagName\"/>\n<$action-sendmessage $message=\"tm-add-field\" $name={{$:/temp/newfieldname}} $value={{$:/temp/newfieldvalue}}/>\n<$action-deletetiddler $tiddler=\"$:/temp/newfieldname\"/>\n<$action-deletetiddler $tiddler=\"$:/temp/newfieldvalue\"/>\n<$action-sendmessage $message=\"tm-save-tiddler\"/>\n\\end\n\n\\define frame-classes()\ntc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$\n\\end\n\n<div class=<<frame-classes>>>\n<$fieldmangler>\n<$set name=\"storyTiddler\" value=<<currentTiddler>>>\n<$keyboard key=\"((cancel-edit-tiddler))\" message=\"tm-cancel-tiddler\">\n<$keyboard key=\"((save-tiddler))\" actions=<<actions>>>\n\n<$wikify name=\"ef\" text=<<edit-filter {{!!template}}>> >\n\n<$list filter=<<ef>> variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n\n</$wikify>\n\n</$keyboard>\n</$keyboard>\n</$set>\n</$fieldmangler>\n</div>\n",
+        "bag": "default",
+        "revision": "0",
+        "type": "text/vnd.tiddlywiki",
+        "title": "$:/plugins/mau/CustomTemplates/edit",
+        "tags": "CustomTemplatesPlugin",
+        "modifier": "Maurizio Boero",
+        "modified": "20171104220017600",
+        "creator": "Maurizio Boero",
+        "created": "20171102115329519"
+    },
+    {
+        "text": "\\define edit-filter(template) \"\"\"[all[shadows+tiddlers]tag[$:/tags/EditTemplate]] [all[shadows+tiddlers]tag[$:/tags/edit/$template$]] -[list[$:/tags/edit/$template$!!template-exclude]] -[has[draft.of]] +[sortby{$:/tags/edit/$template$!!list}]\"\"\"",
+        "bag": "default",
+        "revision": "0",
+        "type": "text/vnd.tiddlywiki",
+        "title": "$:/plugins/mau/CustomTemplates/edit-filter",
+        "tags": "CustomTemplatesPlugin $:/tags/Macro",
+        "modified": "20171104220216507",
+        "created": "20171104215855864"
+    },
+    {
+        "text": "\\define story-filter()\n[list[$:/StoryList]] [list[$:/StoryList]allbefore{$:/HistoryList!!current-tiddler}] [list[$:/StoryList]allafter{$:/HistoryList!!current-tiddler}] +[first[]]\n\\end",
+        "bag": "default",
+        "revision": "0",
+        "type": "text/vnd.tiddlywiki",
+        "title": "$:/plugins/mau/CustomTemplates/story-filter",
+        "tags": "CustomTemplatesPlugin $:/tags/Macro",
+        "modified": "20171104220319284",
+        "created": "20171025105323602"
+    },
+    {
+        "text": "\\define frame-classes()\ntc-tiddler-frame tc-tiddler-view-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$ $(tiddlerTagClasses)$\n\n\\end\n\\define folded-state()\n$:/state/folded/$(currentTiddler)$\n\\end\n\n<$set name=\"storyTiddler\" value=<<currentTiddler>>><$set name=\"tiddlerInfoState\" value=<<qualify \"$:/state/popup/tiddler-info\">>><$tiddler tiddler=<<currentTiddler>>><div class=<<frame-classes>>>\n\n<$wikify name=\"vf\" text=<<view-filter {{!!template}}>> >\n\n<$list filter=<<vf>> variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n\n</$wikify>\n\n</div>\n</$tiddler>\n</$set>\n</$set>\n\n",
+        "bag": "default",
+        "revision": "0",
+        "type": "text/vnd.tiddlywiki",
+        "title": "$:/plugins/mau/CustomTemplates/view",
+        "tags": "CustomTemplatesPlugin",
+        "modifier": "Maurizio Boero",
+        "modified": "20171104215759341",
+        "creator": "Maurizio Boero",
+        "created": "20171102115242759"
+    },
+    {
+        "text": "\\define view-filter(template) \"\"\"[all[shadows+tiddlers]tag[$:/tags/ViewTemplate]] [all[shadows+tiddlers]tag[$:/tags/view/$template$]] -[list[$:/tags/view/$template$!!template-exclude]] -[has[draft.of]] +[sortby{$:/tags/view/$template$!!list}]\"\"\"",
+        "bag": "default",
+        "revision": "0",
+        "type": "text/vnd.tiddlywiki",
+        "title": "$:/plugins/mau/CustomTemplates/view-filter",
+        "tags": "CustomTemplatesPlugin $:/tags/Macro",
+        "modified": "20171104220228700",
+        "created": "20171104215344283"
+    }
+]
