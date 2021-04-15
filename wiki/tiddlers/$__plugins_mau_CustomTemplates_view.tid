@@ -1,20 +1,20 @@
 created: 20171102115242759
 creator: Maurizio Boero
-modified: 20171104215759341
+modified: 20210415152018054
 modifier: Maurizio Boero
 tags: CustomTemplatesPlugin
 title: $:/plugins/mau/CustomTemplates/view
 type: text/vnd.tiddlywiki
 
-\define frame-classes()
-tc-tiddler-frame tc-tiddler-view-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$ $(tiddlerTagClasses)$
-
-\end
 \define folded-state()
 $:/state/folded/$(currentTiddler)$
 \end
 
-<$set name="storyTiddler" value=<<currentTiddler>>><$set name="tiddlerInfoState" value=<<qualify "$:/state/popup/tiddler-info">>><$tiddler tiddler=<<currentTiddler>>><div class=<<frame-classes>>>
+\define cancel-delete-tiddler-actions(message) <$action-sendmessage $message="tm-$message$-tiddler"/>
+
+\import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!has[draft.of]]
+
+<$vars storyTiddler=<<currentTiddler>> tiddlerInfoState=<<qualify "$:/state/popup/tiddler-info">>><div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class={{{ tc-tiddler-frame tc-tiddler-view-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[shadow]is[tiddler]then[tc-tiddler-overridden-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}}>
 
 <$wikify name="vf" text=<<view-filter {{!!template}}>> >
 
@@ -25,7 +25,5 @@ $:/state/folded/$(currentTiddler)$
 </$wikify>
 
 </div>
-</$tiddler>
-</$set>
-</$set>
+</$vars>
 
