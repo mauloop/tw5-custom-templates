@@ -1,7 +1,7 @@
 created: 20171102115329519
 creator: Maurizio Boero
-modified: 20210415152017961
-modifier: Maurizio Boero
+modified: 20210425164656283
+modifier: mauloop
 tags: CustomTemplatesPlugin
 title: $:/plugins/mau/CustomTemplates/edit
 type: text/vnd.tiddlywiki
@@ -28,7 +28,7 @@ type: text/vnd.tiddlywiki
 
 <$wikify name="ef" text=<<edit-filter {{!!template}}>> >
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
+<$list filter=<<ef>> variable="listItem">
 <$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 <$transclude tiddler=<<listItem>>/>
 </$set>
