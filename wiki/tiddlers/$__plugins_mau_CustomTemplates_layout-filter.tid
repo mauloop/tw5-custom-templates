@@ -1,0 +1,11 @@
+created: 20210425162309623
+creator: mauloop
+modified: 20210425163358082
+modifier: mauloop
+tags: CustomTemplatesPlugin $:/tags/Macro
+title: $:/plugins/mau/CustomTemplates/layout-filter
+type: text/vnd.tiddlywiki
+
+\define layout-filter()
+[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]] [[$:/plugins/mau/CustomTemplates/story]] -$:/core/ui/PageTemplate/story
+\end

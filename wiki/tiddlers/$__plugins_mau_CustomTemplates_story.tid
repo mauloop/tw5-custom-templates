@@ -1,9 +1,9 @@
 created: 20171025234922404
 creator: Maurizio Boero
-modified: 20171104213832817
-modifier: Maurizio Boero
-tags: CustomTemplatesPlugin $:/tags/PageTemplate
-title: $:/core/ui/PageTemplate/story
+modified: 20210425155846431
+modifier: mauloop
+tags: CustomTemplatesPlugin
+title: $:/plugins/mau/CustomTemplates/story
 type: text/vnd.tiddlywiki
 
 <section class="tc-story-river">

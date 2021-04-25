@@ -1,0 +1,44 @@
+created: 20210425160426351
+creator: mauloop
+description: This layout enables multiple custom edit/view templates for tiddlers
+modified: 20210425163223980
+modifier: mauloop
+name: CustomTemplatesPlugin layout
+tags: CustomTemplatesPlugin $:/tags/Layout
+title: $:/plugins/mau/CustomTemplates/layout
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\define containerClasses()
+tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
+\end
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+
+<$vars
+	tv-config-toolbar-icons={{$:/config/Toolbar/Icons}}
+	tv-config-toolbar-text={{$:/config/Toolbar/Text}}
+	tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}}
+	tv-enable-drag-and-drop={{$:/config/DragAndDrop/Enable}}
+	tv-show-missing-links={{$:/config/MissingLinks}}
+	storyviewTitle={{$:/view}}
+	languageTitle={{{ [{$:/language}get[name]] }}}>
+
+<div class=<<containerClasses>>>
+
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+
+<$dropzone enable=<<tv-enable-drag-and-drop>>>
+
+<$list filter=<<layout-filter>> variable="listItem">
+
+<$transclude tiddler=<<listItem>>/>
+
+</$list>
+
+</$dropzone>
+
+</$navigator>
+
+</div>
+
+</$vars>
