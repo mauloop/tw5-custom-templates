@@ -1,0 +1,11 @@
+author: mauloop
+core-version: >=5.1.23
+created: 20210415160125741
+creator: mauloop
+description: CustomTemplates
+modified: 20230102194243331
+modifier: mauloop
+plugin-type: plugin
+title: $:/plugins/mau/CustomTemplates
+type: application/json
+version: 0.3.0

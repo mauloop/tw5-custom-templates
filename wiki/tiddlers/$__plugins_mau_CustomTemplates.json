@@ -1,0 +1,96 @@
+{
+    "tiddlers": {
+        "$:/plugins/mau/CustomTemplates/edit": {
+            "text": "\\define delete-edittemplate-state-tiddlers() <$action-deletetiddler $filter=\"[<newFieldNameTiddler>] [<newFieldValueTiddler>] [<newFieldNameInputTiddler>] [<newFieldNameSelectionTiddler>] [<newTagNameTiddler>] [<newTagNameInputTiddler>] [<newTagNameSelectionTiddler>] [<typeInputTiddler>] [<typeSelectionTiddler>]\"/>\n\n\\define save-tiddler-actions()\n<$action-sendmessage $message=\"tm-add-tag\" $param={{{ [<newTagNameTiddler>get[text]] }}}/>\n<$action-sendmessage $message=\"tm-add-field\" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}}/>\n<<delete-edittemplate-state-tiddlers>>\n<$action-sendmessage $message=\"tm-save-tiddler\"/>\n\\end\n\n\\define cancel-delete-tiddler-actions(message)\n<<delete-edittemplate-state-tiddlers>>\n<$action-sendmessage $message=\"tm-$message$-tiddler\"/>\n\\end\n\n<div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class={{{ tc-tiddler-frame tc-tiddler-edit-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}}>\n<$fieldmangler>\n<$vars storyTiddler=<<currentTiddler>> newTagNameTiddler=<<qualify \"$:/temp/NewTagName\">> newFieldNameTiddler=<<qualify \"$:/temp/NewFieldName\">> newFieldValueTiddler=<<qualify \"$:/temp/NewFieldValue\">> newFieldNameInputTiddler=<<qualify \"$:/temp/NewFieldName/input\">> newFieldNameSelectionTiddler=<<qualify \"$:/temp/NewFieldName/selected-item\">> newTagNameInputTiddler=<<qualify \"$:/temp/NewTagName/input\">> newTagNameSelectionTiddler=<<qualify \"$:/temp/NewTagName/selected-item\">> typeInputTiddler=<<qualify \"$:/temp/Type/input\">> typeSelectionTiddler=<<qualify \"$:/temp/Type/selected-item\">>>\n<$keyboard key=\"((cancel-edit-tiddler))\" actions=<<cancel-delete-tiddler-actions \"cancel\">>>\n<$keyboard key=\"((save-tiddler))\" actions=<<save-tiddler-actions>>>\n\n<$wikify name=\"ef\" text=<<edit-filter {{!!template}}>> >\n\n<$list filter=<<ef>> variable=\"listItem\">\n<$set name=\"tv-config-toolbar-class\" filter=\"[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]\">\n<$transclude tiddler=<<listItem>>/>\n</$set>\n</$list>\n\n</$wikify>\n\n</$keyboard>\n</$keyboard>\n</$vars>\n</$fieldmangler>\n</div>",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/plugins/mau/CustomTemplates/edit",
+            "tags": "CustomTemplatesPlugin",
+            "modifier": "mauloop",
+            "modified": "20210425164656283",
+            "creator": "Maurizio Boero",
+            "created": "20171102115329519"
+        },
+        "$:/plugins/mau/CustomTemplates/edit-filter": {
+            "text": "\\define edit-filter(template) \"\"\"[all[shadows+tiddlers]tag[$:/tags/EditTemplate]] [all[shadows+tiddlers]tag[$:/tags/edit/$template$]] -[list[$:/tags/edit/$template$!!template-exclude]] -[has[draft.of]] +[sortby{$:/tags/edit/$template$!!list}]\"\"\"",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/plugins/mau/CustomTemplates/edit-filter",
+            "tags": "CustomTemplatesPlugin $:/tags/Macro",
+            "modified": "20171104220216507",
+            "created": "20171104215855864"
+        },
+        "$:/plugins/mau/CustomTemplates/layout": {
+            "text": "\\whitespace trim\n\\define containerClasses()\ntc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$\n\\end\n\\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]\n\n<$vars\n\ttv-config-toolbar-icons={{$:/config/Toolbar/Icons}}\n\ttv-config-toolbar-text={{$:/config/Toolbar/Text}}\n\ttv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}}\n\ttv-enable-drag-and-drop={{$:/config/DragAndDrop/Enable}}\n\ttv-show-missing-links={{$:/config/MissingLinks}}\n\tstoryviewTitle={{$:/view}}\n\tlanguageTitle={{{ [{$:/language}get[name]] }}}>\n\n<div class=<<containerClasses>>>\n\n<$navigator story=\"$:/StoryList\" history=\"$:/HistoryList\" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>\n\n<$dropzone enable=<<tv-enable-drag-and-drop>>>\n\n<$list filter=<<layout-filter>> variable=\"listItem\">\n\n<$transclude tiddler=<<listItem>>/>\n\n</$list>\n\n</$dropzone>\n\n</$navigator>\n\n</div>\n\n</$vars>\n",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/plugins/mau/CustomTemplates/layout",
+            "tags": "CustomTemplatesPlugin $:/tags/Layout",
+            "name": "CustomTemplatesPlugin layout",
+            "modifier": "mauloop",
+            "modified": "20210425163223980",
+            "description": "This layout enables multiple custom edit/view templates for tiddlers",
+            "creator": "mauloop",
+            "created": "20210425160426351"
+        },
+        "$:/plugins/mau/CustomTemplates/layout-filter": {
+            "text": "\\define layout-filter()\n[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]] [[$:/plugins/mau/CustomTemplates/story]] -$:/core/ui/PageTemplate/story\n\\end",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/plugins/mau/CustomTemplates/layout-filter",
+            "tags": "CustomTemplatesPlugin $:/tags/Macro",
+            "modifier": "mauloop",
+            "modified": "20210425163358082",
+            "creator": "mauloop",
+            "created": "20210425162309623"
+        },
+        "$:/plugins/mau/CustomTemplates/story": {
+            "text": "<section class=\"tc-story-river\">\n\n<section class=\"story-backdrop\">\n\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/AboveStory]!has[draft.of]]\">\n\n<$transclude/>\n\n</$list>\n\n</section>\n\n<$list filter=<<story-filter>> emptyMessage={{$:/config/EmptyStoryMessage}}>\n<$set name=\"vt\" filter=\"\"\"[all[current]get[template]]\"\"\" value=\"$:/plugins/mau/CustomTemplates/view\" emptyValue=\"$:/core/ui/ViewTemplate\">\n<$set name=\"et\" filter=\"\"\"[all[current]get[template]]\"\"\" value=\"$:/plugins/mau/CustomTemplates/edit\" emptyValue=\"$:/core/ui/EditTemplate\">\n\n<$list filter=\"\"\"[all[current]]\"\"\" history=\"$:/HistoryList\" template=<<vt>> editTemplate=<<et>> storyview={{$:/view}} />\n\n</$set>\n</$set>\n</$list>\n\n<section class=\"story-frontdrop\">\n\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/BelowStory]!has[draft.of]]\">\n\n<$transclude/>\n\n</$list>\n\n</section>",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/plugins/mau/CustomTemplates/story",
+            "tags": "CustomTemplatesPlugin",
+            "modifier": "mauloop",
+            "modified": "20210425155846431",
+            "creator": "Maurizio Boero",
+            "created": "20171025234922404"
+        },
+        "$:/plugins/mau/CustomTemplates/story-filter": {
+            "text": "\\define story-filter()\n[list[$:/StoryList]] [list[$:/StoryList]allbefore{$:/HistoryList!!current-tiddler}] [list[$:/StoryList]allafter{$:/HistoryList!!current-tiddler}] +[first[]]\n\\end",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/plugins/mau/CustomTemplates/story-filter",
+            "tags": "CustomTemplatesPlugin $:/tags/Macro",
+            "modified": "20171104220319284",
+            "created": "20171025105323602"
+        },
+        "$:/plugins/mau/CustomTemplates/view": {
+            "text": "\\define folded-state()\n$:/state/folded/$(currentTiddler)$\n\\end\n\n\\define cancel-delete-tiddler-actions(message) <$action-sendmessage $message=\"tm-$message$-tiddler\"/>\n\n\\import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!has[draft.of]]\n\n<$vars storyTiddler=<<currentTiddler>> tiddlerInfoState=<<qualify \"$:/state/popup/tiddler-info\">>><div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class={{{ tc-tiddler-frame tc-tiddler-view-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[shadow]is[tiddler]then[tc-tiddler-overridden-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}}>\n\n<$wikify name=\"vf\" text=<<view-filter {{!!template}}>> >\n\n<$list filter=<<vf>> variable=\"listItem\">\n<$transclude tiddler=<<listItem>>/>\n</$list>\n\n</$wikify>\n\n</div>\n</$vars>\n\n",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/plugins/mau/CustomTemplates/view",
+            "tags": "CustomTemplatesPlugin",
+            "modifier": "Maurizio Boero",
+            "modified": "20210415152018054",
+            "creator": "Maurizio Boero",
+            "created": "20171102115242759"
+        },
+        "$:/plugins/mau/CustomTemplates/view-filter": {
+            "text": "\\define view-filter(template) \"\"\"[all[shadows+tiddlers]tag[$:/tags/ViewTemplate]] [all[shadows+tiddlers]tag[$:/tags/view/$template$]] -[list[$:/tags/view/$template$!!template-exclude]] -[has[draft.of]] +[sortby{$:/tags/view/$template$!!list}]\"\"\"",
+            "bag": "default",
+            "revision": "0",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/plugins/mau/CustomTemplates/view-filter",
+            "tags": "CustomTemplatesPlugin $:/tags/Macro",
+            "modified": "20171104220228700",
+            "created": "20171104215344283"
+        }
+    }
+}

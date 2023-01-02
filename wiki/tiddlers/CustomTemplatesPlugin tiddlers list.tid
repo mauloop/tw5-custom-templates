@@ -1,14 +1,10 @@
 created: 20171104220616063
-modified: 20171104221157343
+creator: mauloop
+modified: 20210425193638947
+modifier: mauloop
 tags: 
 title: CustomTemplatesPlugin tiddlers list
 type: text/vnd.tiddlywiki
-
-@@.tc-tiddler-frame
-@@background:#FFCCFF;
-;Warning
-:this plugin ovveride the default [[$:/core/ui/PageTemplate/story]] shadow tiddler
-@@
 
 <$button class="tc-btn-invisible tc-tiddlylink">
 {{$:/core/images/export-button}} Export these tiddlers in a JSON bundle
